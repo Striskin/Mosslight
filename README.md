@@ -244,3 +244,5 @@ Read `Whats_This.txt` before editing and update it after code work and builds.
 
 Raylib reference: [official 5.5 release](https://github.com/raysan5/raylib/releases/tag/5.5)
 and [API reference](https://www.raylib.com/cheatsheet/cheatsheet.html).
+
+Copyright © 2026 Striskin. All Rights Reserved.

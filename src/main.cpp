@@ -146,6 +146,25 @@ int main(int argc,char** argv) {
                     if(frames==324) {
                         if(!game.save(false)||!game.continueGame()||game.inventory.armor!=moss::Armor::Plate||game.player.health>8||game.lockedEnemy())
                             throw std::runtime_error("Tactics save/load failed");
+                    }
+                    if(frames==325) input.pause=true;
+                    if(frames==326||frames==327) input.down=true;
+                    if(frames==328) { renderer.capture(captures/"25-pause-legend.png"); input.confirm=true; }
+                    if(frames==330) {
+                        if(game.screen!=moss::Screen::Help||game.helpReturn!=moss::Screen::Pause||game.helpPage!=0)
+                            throw std::runtime_error("Pause controls legend did not open");
+                        renderer.capture(captures/"26-pause-controls.png");
+                    }
+                    if(frames==331) input.down=true;
+                    if(frames==333) renderer.capture(captures/"27-pause-tactics.png");
+                    if(frames==334) input.pause=true;
+                    if(frames==335) {
+                        if(game.screen!=moss::Screen::Pause||game.menuSelection!=2)
+                            throw std::runtime_error("Controls legend did not return to pause");
+                        input.pause=true;
+                    }
+                    if(frames==336) {
+                        if(game.screen!=moss::Screen::Playing) throw std::runtime_error("Pause did not resume after reading controls");
                         break;
                     }
                 }

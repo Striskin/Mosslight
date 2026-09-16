@@ -51,6 +51,8 @@ COMPLETED SYSTEMS
   both combatants; a gold reticle and health bar mark the selected enemy.
 - F1/H field guide has controls and combat pages; W/S changes page. Opens from
   title, play and menus, pauses simulation, and restores the previous screen.
+  Pause exposes this as Controls / Legend. Each page has a clear controls or
+  combat title, and the pause navigation hint fits above short notifications.
 - Physical searchable corpses. E collects coins and materials, not automatic
   kill rewards. Beetles yield shells, others fragments. Leftovers stay if full.
 - Coins, two real merchant screens, buy/sell transactions with capacity/funds
@@ -101,7 +103,8 @@ WASD/arrows move; Shift run; J/Z attack; L/X heavy strike; K/C guard;
 Space dodge; 1 fists; 2 sword; 3 bow; hold RMB to aim/face a target;
 F/middle mouse lock/release; R next target; RMB manual aim releases focus;
 E talk, enter, search, open, rest; Q tonic; Tab/I satchel; M journal;
-Satchel: W/S selects, Enter wears/removes owned armor; F1/H field guide;
+Satchel: W/S selects, Enter wears/removes owned armor; F1/H controls legend;
+Escape pause > Controls / Legend > Enter; W/S pages; Escape back to pause;
 W/S or Up/Down select shop offers or scroll satchel; Enter buy/sell/confirm;
 Escape back/pause; F5 save; F10 mute; F11 borderless fullscreen.
 
@@ -114,6 +117,12 @@ Build script downloads/checks raylib if absent and records its result below.
 CMake/Visual Studio alternative is documented but has not been run here.
 Normal save: %LOCALAPPDATA%/Mosslight/journey.sav and .bak backup.
 Smoke runs use separate build/captures saves and never alter the player's journey.
+
+REPOSITORY
+The project folder is now Mosslight. Git is initialized on main and origin is
+https://github.com/Striskin/Mosslight.git. Existing history is preserved.
+Keep source, data, tests, scripts and documentation tracked. Generated build/,
+third_party/, .vs/ and saves/ stay ignored; portable builds are separate files.
 
 VERIFIED PROGRESS (0.3)
 Final Windows game/tests compile without warnings. All 5,608 checks passed.
@@ -133,16 +142,19 @@ incorrectly reused the previous duel's cooldown; it now waits for recovery.
 Visitor tests run 900 simulation frames checking collision safety and motion.
 Normal-input encounter tests pass: original boss through both phases and ending
 (16 seconds), and an actual shield-knight duel with heavy attacks (1.03 seconds).
-Actual raylib/OpenGL/audio smoke run passed: 324 frames, all nine regions, a
+Actual raylib/OpenGL/audio smoke run passed: 336 frames, all nine regions, a
 merchant purchase, armor, bow, guard, inventory, remains, respawn and save/load,
-plus focus, both guide pages and actual armor selection/save/load.
-24 screenshots captured; visually reviewed target focus, both readable guide
-pages, loadout stats and the coat worn in the world. No clipping in these screens.
-Executable approximately 5.09 MB, only Windows system DLL imports. Runtime holds
+plus focus, both guide pages and actual armor selection/save/load. The latest
+run also navigates Escape > Controls / Legend > both pages > pause > resume,
+using regular inputs and assertions for the screen transitions.
+27 screenshots captured. Reviewed the pause entry and both legend pages after
+the latest change; corrected the pause navigation hint's notification overlap.
+Earlier reviews covered target focus, loadout stats and coat appearance.
+Executable approximately 5.1 MB, only Windows system DLL imports. Runtime holds
 one region plus small persistence metadata. No human full playthrough claimed.
-Latest test/run log: build/tactics-verification.log.
+Latest test/run log: build/legend-verification.log.
 Captures: build/captures/*.png. Portable executable matches the final build by
-SHA-256 and independently passed the same 324-frame graphical smoke test.
+SHA-256 and independently passed the same 336-frame graphical smoke test.
 Package log: build/package-verification.log. Portable ZIP refreshed for 0.3.
 
 FILES CHANGED IN 0.3
@@ -152,6 +164,11 @@ dialogue.cpp, main.cpp, render.cpp and ui.cpp; data/items.txt; tests/tests.cpp
 and tests/expansion.hpp; CMakeLists.txt, scripts/build.ps1, README.md and this file.
 No new dependency, service or network permission. Focus scans the small active
 enemy list. Persistence still rejects invalid values before replacing live state.
+
+PAUSE LEGEND UPDATE
+Updated src/ui.cpp, src/main.cpp, README.md and this memory. The existing guide
+is clearly named Controls / Legend in pause. Graphical checks cover its entire
+menu path and return to gameplay. No gameplay, dependency or networking changes.
 
 KNOWN LIMITATIONS
 This is a playable expansion, not a full-length RPG. One main quest chain and
@@ -171,4 +188,4 @@ NEXT
 Keep changes focused, preserve saves, and update this file after code/build work.
 
 LAST BUILD
-2026-09-16 10:16:34: Windows game/tests compiled without warnings. All 5,608 checks and the 324-frame graphical smoke test passed. New captures reviewed; packaged executable also passed its smoke test. Next: human testing of focus, armor choices and combat balance, then tune from feedback.
+2026-09-16 10:59:07: Game and tests compiled without warnings. All 5,608 checks and the 336-frame graphical smoke passed. Pause and both legend pages visually reviewed; packaged executable also passed. Next: human testing of controls discoverability and combat balance.

@@ -113,12 +113,12 @@ void drawOverlay(const Game& g) {
     } else if(g.screen==Screen::Pause) {
         DrawRectangle(0,0,ViewW,ViewH,{7,16,24,170}); panel(130,47,220,174);
         center("A MOMENT OF QUIET",61,20,Gold);
-        const char* labels[]={"Continue wandering","Save journey","Controls & combat","Save and return to title"};
+        const char* labels[]={"Continue wandering","Save journey","Controls / Legend","Save and return to title"};
         for(int i=0;i<4;++i) { if(i==g.menuSelection) DrawRectangle(143,92+i*26,194,22,{43,64,62,255}); center(labels[i],98+i*26,10,i==g.menuSelection?Gold:Paper); }
-        center("W/S SELECT   ENTER CONFIRM",233,10,Muted);
+        center("W/S SELECT   ENTER CONFIRM",203,10,Muted);
     } else if(g.screen==Screen::Help) {
         DrawRectangle(0,0,ViewW,ViewH,{7,16,24,220}); panel(12,15,456,239);
-        text("THE WAYFARER'S FIELD GUIDE",28,28,20,Gold);
+        text(g.helpPage==0?"CONTROLS / LEGEND":"COMBAT TACTICS",28,28,20,Gold);
         DrawRectangle(239,60,1,162,{65,87,81,255});
         if(g.helpPage==0) {
             text("COMBAT & MOVEMENT",28,60,10,Gold); text("LIFE ON THE ROAD",254,60,10,Gold);

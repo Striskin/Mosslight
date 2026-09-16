@@ -63,13 +63,18 @@ update `Whats_This.txt` after using that route.
 | Drink tonic, restores 3 hearts | Q |
 | Satchel and equipped gear | Tab / I |
 | Wear / remove selected owned armor in satchel | Enter |
-| Controls and combat guide, also available from pause | F1 / H |
+| Controls legend and combat guide | Escape, select Controls / Legend, Enter; or F1 / H |
 | Quest journal and route guide | M |
 | Pause / back | Escape |
 | Save now | F5 |
 | Mute sound | F10 |
 | Borderless fullscreen | F11 |
 | Select merchant offer / scroll inventory | W/S or Up/Down |
+
+To check controls while paused, press **Escape**, choose **Controls / Legend**
+with W/S or the arrow keys, and press **Enter**. W/S switches between the controls
+and combat tips pages. Escape returns to pause; press Escape again to resume.
+F1 or H also opens the legend directly.
 
 The game pauses when it loses focus. Dialogue, menus, inventory, journal and
 shop screens pause combat. Resize freely: the 480x270 canvas uses integer scaling and black

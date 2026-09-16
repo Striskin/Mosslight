@@ -49,12 +49,17 @@ void interactWith(Game& g,const std::string& id) {
     throw std::runtime_error("Missing interaction: "+id);
 }
 void testMaps(const std::filesystem::path& data) {
-    for(int i=0;i<5;++i) {
+    for(int i=0;i<RegionCount;++i) {
+        if(i==static_cast<int>(RegionId::Hollow)) continue;
         Region m=loadRegion(data,static_cast<RegionId>(i)); checkConnectivity(m);
         for(const auto& e:m.exits) {
             Region target=e.target==RegionId::Hollow?generateHollow(data,11):loadRegion(data,e.target);
             require(!blocked(target,e.spawn),m.name+" exit has blocked destination");
             for(const auto& back:target.exits) require(!contains(back.bounds,e.spawn),m.name+" arrival immediately re-enters an exit");
+        }
+        for(const auto& o:m.objects) if(o.kind==ObjectKind::Door) {
+            auto target=loadRegion(data,o.target); require(!blocked(target,o.arrival),"Door destination must be walkable");
+            for(const auto& ex:target.exits) require(!contains(ex.bounds,o.arrival),"Door must not immediately eject the player");
         }
     }
     auto first=generateHollow(data,42),same=generateHollow(data,42),other=generateHollow(data,43);
@@ -89,7 +94,7 @@ void testCombat(const std::filesystem::path& data) {
     resolveCombat(p,inv,enemies,shots,m,particles); require(enemies[0].health==2,"One hit per enemy per sword swing");
     p.attackSerial=2; p.facing={-1,0}; resolveCombat(p,inv,enemies,shots,m,particles); require(enemies[0].health==2,"Sword must not hit behind player");
     p.facing={1,0}; inv.add(Item::Sword,1); auto result=resolveCombat(p,inv,enemies,shots,m,particles);
-    require(enemies[0].health==0&&result.kills==1&&inv.get(Item::Fragment)==1,"Equipment damage and enemy loot");
+    require(enemies[0].health==0&&result.kills==1&&result.fallen.size()==1&&inv.get(Item::Fragment)==0,"Equipment damages enemies; loot requires searching remains");
     p.invulnerable=0; require(p.hurt(1,{40,0}),"First contact hurts"); require(!p.hurt(1,{40,0}),"Invulnerability prevents repeated damage");
     require(p.health==5&&p.knockback.x==40,"Damage and knockback are applied");
     inv.add(Item::Tonic,1); require(p.heal(inv)&&p.health==6&&inv.get(Item::Tonic)==0,"Tonic heals and is consumed");
@@ -188,11 +193,16 @@ void testBossFight(const std::filesystem::path& data,const std::filesystem::path
     std::cout<<"PASS: boss defeated in "<<frames/60.0f<<" simulated seconds, persistent victory and ending\n";
 }
 }
+#include "expansion.hpp"
+#include "controls.hpp"
 int main(int argc,char** argv) {
     try {
         if(argc!=3) throw std::runtime_error("Usage: MosslightTests <data-folder> <output-folder>");
         std::filesystem::path data=argv[1],out=argv[2]; std::filesystem::create_directories(out);
         testMaps(data); testMovement(data); testCombat(data); testSaves(data,out); testQuest(data,out); testBossFight(data,out);
+        testTactics(data); testEconomy(data,out); testLootPersistence(data,out); testMigrationAndVisitors(data,out);
+        testKnightDuel(data,out);
+        testFocus(data,out); testArmorChoice(data,out); testGuideAndMigration(data,out);
         std::cout<<"ALL PASS: "<<checks<<" checks\n"; return 0;
     } catch(const std::exception& e) { std::cerr<<"FAIL after "<<checks<<" checks: "<<e.what()<<'\n'; return 1; }
 }

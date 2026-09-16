@@ -14,6 +14,12 @@ moss::Input readInput() {
     in.journal=IsKeyPressed(KEY_M); in.pause=IsKeyPressed(KEY_ESCAPE); in.confirm=IsKeyPressed(KEY_ENTER);
     in.up=IsKeyPressed(KEY_W)||IsKeyPressed(KEY_UP); in.down=IsKeyPressed(KEY_S)||IsKeyPressed(KEY_DOWN);
     in.save=IsKeyPressed(KEY_F5); in.sprint=IsKeyDown(KEY_LEFT_SHIFT)||IsKeyDown(KEY_RIGHT_SHIFT);
+    in.heavy=IsKeyDown(KEY_L)||IsKeyDown(KEY_X); in.block=IsKeyDown(KEY_K)||IsKeyDown(KEY_C);
+    in.lockTarget=IsKeyPressed(KEY_F)||IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE);
+    in.nextTarget=IsKeyPressed(KEY_R); in.help=IsKeyPressed(KEY_F1)||IsKeyPressed(KEY_H);
+    if(IsKeyPressed(KEY_ONE)) in.equip=0;
+    if(IsKeyPressed(KEY_TWO)) in.equip=1;
+    if(IsKeyPressed(KEY_THREE)) in.equip=2;
     return in;
 }
 std::filesystem::path findData(const std::filesystem::path& exe) {
@@ -53,6 +59,8 @@ int main(int argc,char** argv) {
             while(!WindowShouldClose()&&!game.quitRequested) {
                 float dt=smoke?1.0f/60:std::min(GetFrameTime(),.05f);
                 moss::Input input=readInput();
+                input.aiming=IsMouseButtonDown(MOUSE_BUTTON_RIGHT);
+                if(input.aiming) input.aim=renderer.screenToWorld(GetMousePosition())-game.player.pos;
                 if(!smoke&&!IsWindowFocused()&&game.screen==moss::Screen::Playing&&!game.dialogue.active()) { game.screen=moss::Screen::Pause; game.menuSelection=0; }
                 if(IsKeyPressed(KEY_F10)) audio.toggleMute();
                 if(IsKeyPressed(KEY_F11)) ToggleBorderlessWindowed();
@@ -85,14 +93,68 @@ int main(int argc,char** argv) {
                     if(frames==194) renderer.capture(captures/"11-death.png");
                     if(frames==195) input.confirm=true;
                     if(frames==200) { game.save(false); if(!game.continueGame()) throw std::runtime_error("Smoke save/load failed"); }
-                    if(frames==205) { renderer.capture(captures/"12-respawn.png"); break; }
+                    if(frames==205) { renderer.capture(captures/"12-respawn.png"); game.enterRegion(moss::RegionId::Smithy,moss::tileCenter(23,17)); game.toastTime=0; game.regionBanner=0; }
+                    if(frames==225) renderer.capture(captures/"13-smithy.png");
+                    if(frames==226) { game.player.pos=moss::tileCenter(23,16); game.interact(); }
+                    if(frames==228) renderer.capture(captures/"14-merchant.png");
+                    if(frames==229) input.confirm=true;
+                    if(frames==230) {
+                        if(!game.inventory.get(moss::Item::Bow)) throw std::runtime_error("Smoke merchant purchase failed");
+                        input.pause=true;
+                    }
+                    if(frames==231) { game.enterRegion(moss::RegionId::Inn,moss::tileCenter(23,15)); game.regionBanner=0; }
+                    if(frames==250) renderer.capture(captures/"15-inn.png");
+                    if(frames==251) {
+                        game.inventory.add(moss::Item::KnightArmor,1); game.inventory.add(moss::Item::KnightSword,1); game.inventory.equip(moss::Weapon::Bow); game.player.health=10;
+                        game.enterRegion(moss::RegionId::Bailey,moss::tileCenter(21,21)); game.regionBanner=0;
+                    }
+                    if(frames>=252&&frames<=267) { input.aiming=true; input.aim={0,-1}; input.attack=true; }
+                    if(frames==266) renderer.capture(captures/"16-knight-bow.png");
+                    if(frames==278) { game.inventory.equip(moss::Weapon::Sword); game.player.attackTime=0; input.block=true; }
+                    if(frames==279) { renderer.capture(captures/"17-knight-guard.png"); game.screen=moss::Screen::Inventory; game.menuSelection=9; }
+                    if(frames==281) renderer.capture(captures/"18-equipment.png");
+                    if(frames==282) {
+                        game.screen=moss::Screen::Playing; game.enterRegion(moss::RegionId::Forest,moss::tileCenter(11,17)); game.regionBanner=0;
+                        game.progress().drops.push_back({game.player.pos+ moss::Vec{16,0},7,moss::Item::Shell,1,4});
+                    }
+                    if(frames==284) renderer.capture(captures/"19-loot.png");
+                    if(frames==285) {
+                        if(!game.save(false)||!game.continueGame()) throw std::runtime_error("Expansion save/load failed");
+                        game.enterRegion(moss::RegionId::Bailey,moss::tileCenter(20,20)); game.regionBanner=0; game.toastTime=0;
+                    }
+                    if(frames==286) input.lockTarget=true;
+                    if(frames==287&&!game.lockedEnemy()) throw std::runtime_error("Smoke lock-on failed");
+                    if(frames>=287&&frames<=299) { input.move={1,0}; input.block=true; }
+                    if(frames==300) renderer.capture(captures/"20-target-focus.png");
+                    if(frames==301) input.help=true;
+                    if(frames==303) renderer.capture(captures/"21-controls-guide.png");
+                    if(frames==304) input.down=true;
+                    if(frames==306) renderer.capture(captures/"22-combat-guide.png");
+                    if(frames==307) input.pause=true;
+                    if(frames==308) input.inventory=true;
+                    if(frames==310) { game.inventory.add(moss::Item::Coat,1); game.menuSelection=int(moss::Item::Coat); }
+                    if(frames==311) input.confirm=true;
+                    if(frames==312) {
+                        if(game.inventory.armor!=moss::Armor::Coat||game.player.health>8) throw std::runtime_error("Smoke armor selection failed");
+                        game.toastTime=0;
+                    }
+                    if(frames==314) renderer.capture(captures/"23-light-loadout.png");
+                    if(frames==315) input.pause=true;
+                    if(frames==320) renderer.capture(captures/"24-coat-in-world.png");
+                    if(frames==321) input.inventory=true;
+                    if(frames==322) { game.menuSelection=int(moss::Item::KnightArmor); input.confirm=true; }
+                    if(frames==324) {
+                        if(!game.save(false)||!game.continueGame()||game.inventory.armor!=moss::Armor::Plate||game.player.health>8||game.lockedEnemy())
+                            throw std::runtime_error("Tactics save/load failed");
+                        break;
+                    }
                 }
                 game.update(input,dt); audio.update(game.cue,dt); renderer.draw(game,dt); ++frames;
             }
             game.close();
         }
         CloseWindow();
-        if(smoke) std::cout<<"SMOKE PASS: title, all six regions, dialogue, inventory, journal, death, respawn, save/load; "<<frames<<" frames.\n";
+        if(smoke) std::cout<<"SMOKE PASS: nine regions, shops, weapons/loot, target focus, controls/combat guide, armor selection, respawn and save/load; "<<frames<<" frames.\n";
         return 0;
     } catch(const std::exception& error) {
         std::cerr<<"Mosslight: "<<error.what()<<'\n';

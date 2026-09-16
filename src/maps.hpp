@@ -2,13 +2,15 @@
 #include "types.hpp"
 #include <filesystem>
 namespace moss {
-enum class ObjectKind { Npc,Chest,Checkpoint,Altar,Sign };
+enum class ObjectKind { Npc,Chest,Checkpoint,Altar,Sign,Door,Merchant };
 struct Object {
     ObjectKind kind=ObjectKind::Sign;
     std::string id,label;
     Vec pos;
     Item item=Item::Tonic;
     int amount=1;
+    RegionId target=RegionId::Village;
+    Vec arrival{};
 };
 struct Exit { Rect bounds; RegionId target; Vec spawn; bool locked=false; };
 struct Spawn { int type; Vec pos; };

@@ -21,7 +21,7 @@ try {
         if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash -ne $expected) { throw 'raylib archive checksum mismatch.' }
         Expand-Archive -LiteralPath $archive -DestinationPath third_party -Force
     }
-    $core = @('collision','combat','dialogue','enemies','game','inventory','maps','player','procedural','save') | ForEach-Object { "src/$_.cpp" }
+    $core = @('collision','combat','dialogue','enemies','game','inventory','maps','merchant','npcs','player','procedural','save','targeting') | ForEach-Object { "src/$_.cpp" }
     $flags = @('-std=c++17','-O2','-Wall','-Wextra','-Wpedantic','-Isrc','-static','-static-libgcc','-static-libstdc++')
     & $Compiler @flags "-I$ray/include" @core src/main.cpp src/render.cpp src/ui.cpp src/audio.cpp "$ray/lib/libraylib.a" -lopengl32 -lgdi32 -lwinmm -o build/Mosslight.exe
     if ($LASTEXITCODE -ne 0) { throw 'Game compilation failed.' }

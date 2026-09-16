@@ -9,6 +9,7 @@ public:
     Renderer& operator=(const Renderer&)=delete;
     void draw(const Game& game,float dt);
     void capture(const std::filesystem::path& path) const;
+    Vec screenToWorld(Vector2 position) const;
 private:
     RenderTexture2D target{};
     Vec camera{};

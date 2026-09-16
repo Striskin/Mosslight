@@ -31,10 +31,13 @@ Write-Map 'village' 0 'Hearthmere' 'Where every road begins with a warm cup' @'
 exit 46 16 2 4 1 3 17 0
 object 0 keeper 22 14 0 1 "Keeper Aven"
 object 0 weaver 12 21 0 1 "Talla the Weaver"
+object 0 guard 36 18 0 1 "Sir Rowan, roadwarden"
+door smith_door 34 12 6 23 26 "The Ember & Anvil"
+door inn_door 9 12 7 23 26 "The Copper Kettle"
 object 2 village_lantern 19 17 0 1 "Hearth lantern"
 object 1 village_supplies 10 13 0 2 "A traveller's welcome"
-object 4 village_east 40 15 0 1 "EAST: Fernwake Wood. NORTH in the forest: the old shrine. SOUTH: Stillwater Cave. A lantern is always a way home."
-object 4 village_water 29 23 0 1 "For all who wander: WASD to walk, J to swing, SPACE to dodge, E to talk or open, Q for a tonic. TAB opens your satchel."
+object 4 village_east 40 15 0 1 "EAST: Fernwake Wood, then Greywatch Bailey. The northeast house is the smith. The northwest house is the inn. Stand by a door and press E to enter."
+object 4 village_water 29 23 0 1 "WASD: move. J: attack. L: heavy strike. K: guard. SPACE: dodge. 1/2/3: fists/sword/bow. Hold RMB to aim. E searches fallen enemies. Resting resets encounters."
 '@
 New-Map '.' 'T'
 Box 1 1 16 5 'T'; Box 29 1 18 5 'T'; Box 1 24 14 9 'T'; Box 33 25 14 8 'T'
@@ -44,20 +47,25 @@ Box 0 7 9 3 '+'; Box 6 8 3 9 '+'; Box 39 15 4 6 '+'
 Box 0 16 2 4 '+'; Box 18 9 2 3 ','; Box 27 25 3 3 ','; Box 39 7 4 3 ','
 Box 28 21 4 3 '~'; Box 29 24 4 3 '~'; Box 3 29 3 2 ','
 Box 14 25 4 3 ','; Box 16 6 3 2 ','; Box 41 25 3 2 ','
+Box 42 16 6 3 '+'
 Write-Map 'forest' 1 'Fernwake Wood' 'Between birdsong and old, sleeping magic' @'
 exit 0 16 2 4 0 43 17 0
 exit 21 0 5 2 3 23 29 0
 exit 21 32 5 2 2 23 3 0
 exit 0 7 2 3 5 3 8 0
+exit 46 16 2 3 8 3 17 0
 object 1 forest_ember 41 17 4 1 "An ember-warm cache"
 object 1 forest_tonic 17 27 0 2 "Herbalist's cache"
-object 4 forest_crossroads 26 17 0 1 "NORTH: the Quiet Bell shrine. SOUTH: Stillwater Cave. WEST: Hearthmere. NORTHWEST: the Wandering Hollow, where an old copper blade waits."
+object 4 forest_crossroads 26 17 0 1 "NORTH: the shrine. SOUTH: Stillwater Cave. WEST: Hearthmere's shops. EAST: Greywatch Bailey, beware oathless knights. NORTHWEST: the Wandering Hollow and an old copper blade."
 object 4 forest_hollow 5 10 0 1 "THE WANDERING HOLLOW. The stone paths shift for each traveller, then remember their footsteps. Copper waits in the far southeastern room."
 enemy 0 17 17
 enemy 0 36 17
 enemy 1 25 10
 enemy 0 23 26
 enemy 1 39 24
+enemy 4 11 17
+enemy 4 17 8
+enemy 4 30 28
 '@
 New-Map '#' '#'
 Box 17 1 14 10 '.'; Box 8 9 31 9 '.'; Box 4 18 16 10 '.'; Box 25 19 18 11 '.'
@@ -76,6 +84,50 @@ enemy 0 23 12
 enemy 1 31 15
 enemy 0 11 18
 enemy 1 28 24
+enemy 4 18 16
+'@
+New-Map '#' '#'
+Box 10 7 28 23 ':'; Box 21 27 5 7 ':'
+Box 12 8 6 1 's'; Box 31 8 5 1 's'; Box 31 10 4 3 'f'
+Box 17 13 13 1 '='; Box 12 16 2 2 'b'; Box 34 19 2 2 'b'
+Box 19 20 10 5 'r'; Box 28 9 1 1 'B'
+Write-Map 'smithy' 4 'The Ember & Anvil' 'Steel, sinew, and a fair price' @'
+exit 21 32 5 2 0 34 14 0
+object 6 smith 23 15 0 1 "Master Harl, smith & trader"
+object 4 smith_notes 29 23 0 1 "BUY with ENTER. Scroll with W/S. Sell shells and glow fragments for coins. Gear equips automatically; switch weapons with 1, 2, 3. Plate reduces heavy damage but makes you slower."
+object 4 forge_notes 30 15 0 1 "A knight's lesson: your sword needs room. J is a quick cut, L a slower guard-breaking strike. Leave enough green stamina for a dodge. K raises your guard; time it well to stagger an attacker."
+'@
+New-Map '#' '#'
+Box 9 7 30 23 '_'; Box 21 27 5 7 '_'
+Box 11 8 6 1 's'; Box 30 9 6 1 '='; Box 35 8 2 1 'b'
+Box 12 10 4 2 'f'; Box 13 17 3 2 '='; Box 30 20 4 2 '='
+Box 11 24 3 2 'b'; Box 28 13 1 1 'B'; Box 19 19 7 6 'r'
+Write-Map 'inn' 4 'The Copper Kettle' 'A warm hearth between uncertain roads' @'
+exit 21 32 5 2 0 9 14 0
+object 6 innkeeper 32 12 0 1 "Nessa, keeper of the Kettle"
+object 2 inn_hearth 17 12 0 1 "The guest hearth"
+object 4 inn_notice 26 25 0 1 "IRONBACK SHELLS WANTED. The smith pays six coins each. Defeat a beetle, approach its remains, and press E to search. Coins and unsold materials stay with you if you fall."
+'@
+New-Map '.' 'T'
+Box 10 4 33 26 ':'; Box 9 4 2 26 '#'; Box 42 4 2 26 '#'
+Box 9 4 35 2 '#'; Box 9 28 35 2 '#'; Box 0 16 20 4 '+'
+Box 8 7 4 6 '#'; Box 8 22 4 6 '#'; Box 40 7 5 6 '#'; Box 40 22 5 6 '#'
+Box 18 7 17 3 '#'; Box 20 9 13 1 '#'; Box 24 9 4 2 ':'
+Box 15 11 2 2 'P'; Box 36 11 2 2 'P'; Box 15 23 2 2 'P'; Box 36 23 2 2 'P'
+Box 16 9 1 1 'B'; Box 36 9 1 1 'B'; Box 16 25 1 1 'B'; Box 36 25 1 1 'B'
+Box 31 23 3 2 'b'; Box 13 7 2 2 'b'; Box 34 14 2 2 'b'
+Box 21 13 10 11 'r'; Box 23 25 6 2 ':'
+Write-Map 'bailey' 4 'Greywatch Bailey' 'The old oath is written in steel' @'
+exit 0 16 2 4 1 43 17 0
+object 2 bailey_lantern 5 20 0 1 "Roadwarden's lantern"
+object 0 guard 5 14 0 1 "Sir Elowen, the last watch"
+object 1 bailey_plate 26 11 9 1 "The watch captain's armor"
+object 1 bailey_arrows 37 26 8 15 "An archer's reserve"
+object 4 bailey_warning 13 19 0 1 "OATHLESS KNIGHTS: shields stop frontal light attacks and arrows. Circle behind, use L to break guard, or time K just before a blow. Gold sparks mark an opening. Search the fallen with E."
+enemy 3 22 18
+enemy 3 33 18
+enemy 3 26 13
+enemy 4 18 25
 '@
 New-Map '.' 'T'
 Box 1 1 16 5 'T'; Box 31 1 16 5 'T'; Box 1 25 13 8 'T'; Box 34 25 13 8 'T'

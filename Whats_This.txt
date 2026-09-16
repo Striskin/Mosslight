@@ -1,110 +1,174 @@
-MOSSLIGHT: THE QUIET BELL
-PROJECT MEMORY: READ THIS BEFORE CHANGING CODE
+MOSSLIGHT: THE QUIET BELL / STEEL & HEARTH (0.3)
+PROJECT MEMORY: READ BEFORE CHANGING CODE
 Update this file after every code-work session and every build. Record actual
-completed work, verification, remaining issues, and concrete next steps.
-AGENTS.md enforces this. scripts/build.ps1 automatically records build outcomes.
+completed work, verification, limitations and concrete next steps. AGENTS.md
+requires this; scripts/build.ps1 automatically records build results below.
 
 GAME GOAL
-An original, cozy 2D top-down exploration action RPG in C++17 and raylib only.
-Smooth eight-direction movement, readable pixel art, connected regions, real-time
-sword combat, ruins, caves, gear, a quest and a boss. Prioritize stable, enjoyable
-play and small dependencies. Do not copy existing games' characters, names,
-assets, maps, UI, music, or stories. Do not add a large engine or ECS framework.
+An original medieval 2D top-down exploration action RPG in C++17 and raylib only.
+Cozy villages and inns contrast with deliberate, readable fights in woods,
+caves, ruined shrines and a knight-held fort. Player freedom, clear telegraphs,
+small dependencies and stable gameplay matter more than scale. Keep original
+names, stories, UI and pixel artwork. Reference games inspire broad atmosphere,
+not copied characters, assets, layouts, music or stories. No large engine or ECS.
 
-SETTING AND PLAYABLE STORY
-Hearthmere's Quiet Bell has fallen silent. Keeper Aven asks the wayfarer to find
-an Ember Seed in Fernwake Wood and Moon Dew in Stillwater Cave. Offer both at
-The Quiet Bell Shrine to open The Warden's Garden. Soothe the Hollow Warden and
-return its Bellheart to Aven for the ending. Talla trades four glow fragments
-for a mosswoven coat. The optional Wandering Hollow contains a copper blade.
+CURRENT STORY AND WORLD
+Keeper Aven in Hearthmere asks for an Ember Seed from Fernwake Wood and Moon Dew
+from Stillwater Cave. Offer both at the Quiet Bell Shrine, then defeat the Hollow
+Warden and return its Bellheart to Aven. The optional Wandering Hollow contains
+a copper blade. Talla trades four glow fragments for a travelling coat.
+NEW: The Ember & Anvil smithy occupies the northeast village house; the Copper
+Kettle inn is the northwest house. Greywatch Bailey lies east beyond the forest.
+Its oathless knights guard a chest of knight plate. Roadwardens teach combat.
 
 COMPLETED SYSTEMS
-- Title, continue, new journey with overwrite confirmation, pause and clean exit.
-- Eight-direction walking/running, facing, tile collision and camera following.
-- Five handcrafted 48x34 regions, loaded one at a time, plus one generated cave.
-- Data-driven map layouts, exits, objects, items, enemy tuning and room templates.
-- NPC dialogue and contextual interaction prompts; satchel and quest journal.
-- Persistent chests, tonics, fragments, relics, automatically equipped sword/coat.
-- Sword arcs, per-swing hit tracking, enemy/player health, knockback, dodge,
-  invulnerability, death and respawn at village or shrine lantern checkpoints.
-- Bramblekin telegraph a lunge; lantern moths keep distance and fire projectiles.
-- Hollow Warden alternates telegraphed charges and radial volleys, faster below
-  half health. Persistent victory, reward and ending. Retreat is allowed.
-- Seeded template cave: six connected rooms, variable bridges/loops, encounters
-  and supply loot. Explicit mt19937 mapping preserves repeatability.
-- Versioned, bounded, validated, checksummed save snapshots; atomic replacement,
-  valid previous-save backup, recovery and visible save-error notifications.
-- Original pixel shapes/sprites, 480x270 target, integer scaling, letterboxing,
-  region banners, boss health/telegraphs, generated chime ambience and sound cues.
-- Windows MinGW build script, CMake alternative, regression suite and graphical
-  smoke/capture mode. README documents controls, walkthrough and architecture.
+- Title, new/continue with overwrite confirmation, pause, death and ending.
+- Smooth eight-direction walking/running, facing, tile collisions and camera.
+- Nine regions: eight handcrafted maps plus one deterministic six-room cave.
+  One full map is loaded at a time; only small persistence records are retained.
+- Original pixel sprites/shapes, 480x270 virtual canvas, integer scaling,
+  letterboxing, generated sound cues/ambience, dialogue, prompts and journal.
+- Quest, persistent chests, checkpoint lanterns, death/respawn and save/load.
+- Fists, sword and bow, selected with 1/2/3. Fists are fast/short range, sword
+  cuts have windup/active/recovery, bows consume arrows and use swept collision.
+- Heavy attacks break knight guards, stagger foes, cost more stamina and commit
+  the player longer. Staggered targets take one extra damage per hit.
+- Directional guard: the first 0.16 seconds give a timed block and stagger the
+  attacker. Normal blocks cost more stamina; exhaustion breaks guard. RMB aims
+  bows or turns facing while moving/guarding. Bow users cannot guard.
+- Stamina costs for attacks, dodge, guard and sprint, with recovery between
+  actions. Attacks cannot be cancelled into guarding or dodging.
+- Four regular enemy types: bramblekin, lantern moth, ironback beetle and
+  oathless shield knight. Hollow Warden has charges, volleys and two phases.
+- Copper blade (2 sword damage), knight longsword (3), moss coat (8 hearts),
+  knight plate (10 hearts, reduces heavy hits by 1, movement 9% slower, higher
+  dodge stamina cost). Strongest sword upgrades and first-time armor upgrades
+  equip automatically. Satchel Enter changes/removes owned armor. Armor swaps
+  clamp current health, never heal. Talla offers light coats even to plate owners.
+- Runtime enemy focus uses stable spawn ids. F/middle mouse locks/releases, R
+  cycles, RMB releases into manual aim. Movement strafes around the target;
+  walls, distance, death, rest and region changes release focus. Camera frames
+  both combatants; a gold reticle and health bar mark the selected enemy.
+- F1/H field guide has controls and combat pages; W/S changes page. Opens from
+  title, play and menus, pauses simulation, and restores the previous screen.
+- Physical searchable corpses. E collects coins and materials, not automatic
+  kill rewards. Beetles yield shells, others fragments. Leftovers stay if full.
+- Coins, two real merchant screens, buy/sell transactions with capacity/funds
+  checks. Shells sell for 6 coins, fragments for 2. Quest items cannot be sold.
+- Two enterable houses with interiors, forges/hearths, shelves, counters, tables,
+  rugs and doors. Inn hearth is a real checkpoint. Remaining cottage is scenery.
+- Seeded, named visitors wander in village/inn with collision-aware local motion,
+  stop near the player and offer six original practical lore conversations.
+- Version-3 saves include coins, equipment/selected weapon and armor, stamina, quest,
+  chests, cave seed, checkpoints, defeated spawn IDs and pending loot by region.
+- Version-1 and version-2 migration preserves previous strongest worn armor.
+  Version-1 migration also preserves old progress and gives 24 coins/12 arrows,
+  once. New games also start with 24 coins/12 arrows. Existing journeys work.
+- Bounded/validated/checksummed saves, atomic replace, valid previous backup,
+  recovery, and visible save errors. No external services or runtime networking.
+
+IMPORTANT BEHAVIOR
+Defeated foes and unclaimed loot survive travel and save/load. Living enemies
+reload with full health. Resting or respawning resets encounters and discards
+unclaimed loot, while preserving acquired coins/items/quest/chests. A defeated
+boss never respawns. The main quest's Bellheart is granted automatically on
+victory; optional coins/materials remain in its searchable corpse.
+Dialogue, satchel, journal, shops and pause freeze combat. Focus loss pauses play.
+This is approachable, not a punitive death/coin-loss game.
 
 ARCHITECTURE AND FILES
-src/types.hpp: plain simulation types, with no raylib dependency.
-src/game.*: screens, interaction orchestration, quest, transitions, checkpoints.
-src/player.*, collision.*, enemies.*, combat.*: movement and combat simulation.
-src/inventory.*, dialogue.*, maps.*, procedural.*, save.*: focused game systems.
-src/main.cpp, render.*, ui.*, audio.*: raylib/input/presentation only.
-data/maps/*.map: handcrafted ASCII tile maps with explicit object/exit records.
-data/items.txt, enemies.txt, rooms.txt: tuning and room data.
-scripts/author-maps.ps1: optional offline authoring, never called by the game.
-tests/tests.cpp: standalone C++ tests, no test-framework dependency.
-Runtime dependencies: C++ standard library and raylib 5.5 only. No network calls.
-
-BUILD AND RUN
-Windows build verified with MSYS2 UCRT64 GCC 14.2.0 and official raylib 5.5.
-PowerShell: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1 -Test -Smoke
-Play: build/Mosslight.exe
-Portable ZIP: build/Mosslight-win64.zip (extract the entire Mosslight folder).
-Distribution: executable plus adjacent data/ and RAYLIB-LICENSE.txt.
-Official raylib archive is pinned and SHA-256 checked by the build script.
-CMake/Visual Studio alternative is documented but has NOT been exercised here.
-Windows save: %LOCALAPPDATA%/Mosslight/journey.sav, with .bak backup.
-Smoke mode uses build/captures/smoke.sav, never the player's normal save.
+src/types.hpp: plain C++ simulation types and stable enum IDs. Append new item
+and region IDs; do not reorder old IDs, because maps/saves use them.
+src/game.*: screens, interactions, active region, checkpoints and orchestration.
+src/player.*, collision.*, enemies.*, combat.*: movement and tactical combat.
+src/targeting.*: stable runtime focus, cycling, occlusion/range and facing input.
+src/inventory.*, merchant.*: items, gear stats and validated transactions.
+src/dialogue.*, npcs.*: original conversations and seeded wandering visitors.
+src/maps.*, procedural.*: map parsing and repeatable cave generation.
+src/save.*: v3 serialization, v1/v2 migration and world/equipment validation.
+src/main.cpp, render.*, ui.*, audio.*: raylib/input/presentation and smoke harness.
+data/maps/*.map: handcrafted ASCII grids with exits, doors, NPCs and enemy spawns.
+data/items.txt: stable id, quoted name, quoted description, resale price.
+data/enemies.txt: stable id, quoted name, health, speed and detection range.
+data/shops.txt: merchant id, item id, bundle quantity, price.
+data/rooms.txt: procedural templates. scripts/author-maps.ps1 is optional offline
+map authoring, never executed by the game. Modify its coordinates if regenerating.
+tests/tests.cpp + tests/expansion.hpp + tests/controls.hpp: C++ regression checks.
+No added dependencies: C++ standard library plus raylib 5.5.
 
 CONTROLS
-WASD/arrows move; Shift runs; J/Z sword; Space dodge; E interact;
-Q tonic; Tab/I satchel; M journal; Escape pause/back; Enter confirm/respawn;
-F5 save; F10 mute; F11 borderless fullscreen. Losing focus pauses active play.
+WASD/arrows move; Shift run; J/Z attack; L/X heavy strike; K/C guard;
+Space dodge; 1 fists; 2 sword; 3 bow; hold RMB to aim/face a target;
+F/middle mouse lock/release; R next target; RMB manual aim releases focus;
+E talk, enter, search, open, rest; Q tonic; Tab/I satchel; M journal;
+Satchel: W/S selects, Enter wears/removes owned armor; F1/H field guide;
+W/S or Up/Down select shop offers or scroll satchel; Enter buy/sell/confirm;
+Escape back/pause; F5 save; F10 mute; F11 borderless fullscreen.
 
-VERIFIED PROGRESS
-Final Windows build passed without compiler warnings.
-2,692 simulation checks passed: all handcrafted routes and destination spawns,
-256 seeded cave layouts, normalized movement, swept collision, sword arc/hit
-tracking, gear, enemy behaviors and both boss phases, save corruption/recovery,
-failed-save notifications, relic quest/gate, death/respawn, continuation and ending.
-A prepared-loadout input bot defeated the boss in 10.63 simulated seconds.
-This is automated validation, not a claim of a human end-to-end playthrough.
-Actual raylib/OpenGL/audio initialization and 205-frame graphical smoke passed.
-12 screenshots captured; title, world, dialogue, inventory, journal, death and
-boss presentation inspected. Fixed player visibility during invulnerability,
-boss camera framing, banner contrast, and a journal line crossing a label.
-Executable is about 5 MB and imports only Windows system libraries.
-Verification log: build/verification.log. Captures: build/captures/*.png.
-Final package check passed: packaged executable matches the tested build by
-SHA-256, all required data/license files are present in the ZIP, and the packaged
-executable independently completed the 205-frame graphical smoke test.
-Package log: build/package-verification.log. Portable ZIP is about 1.5 MB.
+BUILD, RUN AND SAVE
+Windows: MSYS2 UCRT64 GCC 14.2.0 plus official pinned raylib 5.5 archive.
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1 -Test -Smoke
+Play build/Mosslight.exe. Keep data/ beside the executable.
+Portable package: build/Mosslight-win64.zip, extract the whole folder.
+Build script downloads/checks raylib if absent and records its result below.
+CMake/Visual Studio alternative is documented but has not been run here.
+Normal save: %LOCALAPPDATA%/Mosslight/journey.sav and .bak backup.
+Smoke runs use separate build/captures saves and never alter the player's journey.
+
+VERIFIED PROGRESS (0.3)
+Final Windows game/tests compile without warnings. All 5,608 checks passed.
+Tests cover all map/door routes, 256 cave seeds, normalized collision-safe
+movement, attacks/iframes, stamina/windup, actual fist damage/range, directional
+and timed guards, heavy guard break, shield flanking, armor, swept arrows and
+wall blocking, ammunition consumption, shop transactions/funds/capacity, actual
+house entry/exit, inn checkpoint, searchable beetle loot, anti-duplication across
+travel/reload, rest reset, v1/v2 migration and expanded save roundtrips.
+New checks cover target acquisition/cycling, stable spawn IDs, walls, range,
+death and region changes; locked strafing guard, a real locked knight duel and
+an actual aimed bow hit. Armor tests check the weaver trade after acquiring
+plate, actual movement/protection/dodge costs, no healing from switching,
+autosave, respawn and invalid/unowned saved armor rejection. Guide tests check
+title/pause/dialogue navigation and freezing the game. The initial bow fixture
+incorrectly reused the previous duel's cooldown; it now waits for recovery.
+Visitor tests run 900 simulation frames checking collision safety and motion.
+Normal-input encounter tests pass: original boss through both phases and ending
+(16 seconds), and an actual shield-knight duel with heavy attacks (1.03 seconds).
+Actual raylib/OpenGL/audio smoke run passed: 324 frames, all nine regions, a
+merchant purchase, armor, bow, guard, inventory, remains, respawn and save/load,
+plus focus, both guide pages and actual armor selection/save/load.
+24 screenshots captured; visually reviewed target focus, both readable guide
+pages, loadout stats and the coat worn in the world. No clipping in these screens.
+Executable approximately 5.09 MB, only Windows system DLL imports. Runtime holds
+one region plus small persistence metadata. No human full playthrough claimed.
+Latest test/run log: build/tactics-verification.log.
+Captures: build/captures/*.png. Portable executable matches the final build by
+SHA-256 and independently passed the same 324-frame graphical smoke test.
+Package log: build/package-verification.log. Portable ZIP refreshed for 0.3.
+
+FILES CHANGED IN 0.3
+Added src/targeting.hpp, src/targeting.cpp and tests/controls.hpp.
+Updated src/types.hpp, game.hpp/cpp, inventory.hpp/cpp, player.cpp, save.cpp,
+dialogue.cpp, main.cpp, render.cpp and ui.cpp; data/items.txt; tests/tests.cpp
+and tests/expansion.hpp; CMakeLists.txt, scripts/build.ps1, README.md and this file.
+No new dependency, service or network permission. Focus scans the small active
+enemy list. Persistence still rejects invalid values before replacing live state.
 
 KNOWN LIMITATIONS
-First vertical slice: one quest chain, one boss, two regular enemy types, two
-gear upgrades and one procedural cave. Buildings are exterior scenery. Original
-art is deliberately simple. No controller/remapping, multi-slot saves or authored
-soundtrack yet. Enemies use local steering and reset on region reload; the boss
-stays defeated after victory. No unresolved compile/test failures.
-Save checksum detects corruption, not deliberate save editing. This is a local
-single-player game, with no accounts, secrets, backend or runtime network access.
+This is a playable expansion, not a full-length RPG. One main quest chain and
+boss, nine regions, four regular foes, three weapon styles, two merchants.
+No controller/remapping, multiple save slots, authored soundtrack, crafting,
+schedules or reputation. Sword upgrade selection remains automatic. Simple
+original pixel art remains.
+Enemy navigation uses local steering, not pathfinding. Visitors are simple
+wanderers, not a simulated town economy. Save checksums detect accidental damage,
+not intentional editing. Human balance/feel testing remains necessary.
 
 NEXT
-1. Human playtest the full journey, especially controller-free combat feel,
-   signposting, boss telegraphs, healing pressure, travel time and reward balance.
-2. Tune the existing slice from that feedback before expanding the world.
-3. Then consider input remapping/controller support and a second compact quest.
-Keep systems focused. Preserve working behavior. Update this memory after edits.
+1. Human playtest lock-on/camera/cycling, armor switching, stamina recovery, timed
+   blocking, bow aiming, knight aggression, merchant prices and prompt clarity.
+2. Tune current combat and economy from that feedback before adding content.
+3. Consider input remapping/controller support and an optional knight quest next.
+Keep changes focused, preserve saves, and update this file after code/build work.
 
 LAST BUILD
-2026-09-14 23:32:14: Game compiled. All 2,692 simulation checks and graphical smoke test passed. Screenshot review completed. Next: human balance/playtesting.
-
-LAST PACKAGE CHECK
-2026-09-15: Portable package verified, matching executable hash and independent
-graphical smoke pass. Complete first playable slice ready for the user.
+2026-09-16 10:16:34: Windows game/tests compiled without warnings. All 5,608 checks and the 324-frame graphical smoke test passed. New captures reviewed; packaged executable also passed its smoke test. Next: human testing of focus, armor choices and combat balance, then tune from feedback.

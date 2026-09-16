@@ -1,0 +1,45 @@
+MOSSMAP1 48 34 4 "Greywatch Bailey" "The old oath is written in steel"
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+T..............................................T
+T..............................................T
+T..............................................T
+T........###################################...T
+T........###################################...T
+T........##:::::::::::::::::::::::::::::::##...T
+T.......####:bb:::#################:::::#####..T
+T.......####:bb:::#################:::::#####..T
+T.......####::::B:######::::#######:B:::#####..T
+T.......####::::::::::::::::::::::::::::#####..T
+T.......####:::PP:::::::::::::::::::PP::#####..T
+T.......####:::PP:::::::::::::::::::PP::#####..T
+T........##::::::::::rrrrrrrrrr:::::::::::##...T
+T........##::::::::::rrrrrrrrrr:::bb::::::##...T
+T........##::::::::::rrrrrrrrrr:::bb::::::##...T
+++++++++++++++++++++:rrrrrrrrrr:::::::::::##...T
+++++++++++++++++++++:rrrrrrrrrr:::::::::::##...T
+++++++++++++++++++++:rrrrrrrrrr:::::::::::##...T
+++++++++++++++++++++:rrrrrrrrrr:::::::::::##...T
+T........##::::::::::rrrrrrrrrr:::::::::::##...T
+T........##::::::::::rrrrrrrrrr:::::::::::##...T
+T.......####:::::::::rrrrrrrrrr:::::::::#####..T
+T.......####:::PP::::rrrrrrrrrrbbb::PP::#####..T
+T.......####:::PP::::::::::::::bbb::PP::#####..T
+T.......####::::B:::::::::::::::::::B:::#####..T
+T.......####::::::::::::::::::::::::::::#####..T
+T.......####::::::::::::::::::::::::::::#####..T
+T........###################################...T
+T........###################################...T
+T..............................................T
+T..............................................T
+T..............................................T
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+exit 0 16 2 4 1 43 17 0
+object 2 bailey_lantern 5 20 0 1 "Roadwarden's lantern"
+object 0 guard 5 14 0 1 "Sir Elowen, the last watch"
+object 1 bailey_plate 26 11 9 1 "The watch captain's armor"
+object 1 bailey_arrows 37 26 8 15 "An archer's reserve"
+object 4 bailey_warning 13 19 0 1 "OATHLESS KNIGHTS: shields stop frontal light attacks and arrows. Circle behind, use L to break guard, or time K just before a blow. Gold sparks mark an opening. Search the fallen with E."
+enemy 3 22 18
+enemy 3 33 18
+enemy 3 26 13
+enemy 4 18 25

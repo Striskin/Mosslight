@@ -1,0 +1,6 @@
+smith 7 1 18
+smith 8 10 4
+smith 10 1 32
+smith 9 1 38
+innkeeper 0 1 6
+innkeeper 8 5 3

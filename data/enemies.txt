@@ -1,3 +1,5 @@
 0 "Bramblekin" 3 27 125
 1 "Lantern moth" 2 24 145
 2 "Hollow Warden" 32 140 1000
+3 "Oathless knight" 9 31 155
+4 "Ironback beetle" 4 35 110

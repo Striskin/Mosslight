@@ -36,7 +36,10 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 exit 46 16 2 4 1 3 17 0
 object 0 keeper 22 14 0 1 "Keeper Aven"
 object 0 weaver 12 21 0 1 "Talla the Weaver"
+object 0 guard 36 18 0 1 "Sir Rowan, roadwarden"
+door smith_door 34 12 6 23 26 "The Ember & Anvil"
+door inn_door 9 12 7 23 26 "The Copper Kettle"
 object 2 village_lantern 19 17 0 1 "Hearth lantern"
 object 1 village_supplies 10 13 0 2 "A traveller's welcome"
-object 4 village_east 40 15 0 1 "EAST: Fernwake Wood. NORTH in the forest: the old shrine. SOUTH: Stillwater Cave. A lantern is always a way home."
-object 4 village_water 29 23 0 1 "For all who wander: WASD to walk, J to swing, SPACE to dodge, E to talk or open, Q for a tonic. TAB opens your satchel."
+object 4 village_east 40 15 0 1 "EAST: Fernwake Wood, then Greywatch Bailey. The northeast house is the smith. The northwest house is the inn. Stand by a door and press E to enter."
+object 4 village_water 29 23 0 1 "WASD: move. J: attack. L: heavy strike. K: guard. SPACE: dodge. 1/2/3: fists/sword/bow. Hold RMB to aim. E searches fallen enemies. Resting resets encounters."

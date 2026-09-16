@@ -1,6 +1,20 @@
 #include "dialogue.hpp"
 namespace moss {
 DialogueResult talkTo(const std::string& id,Quest& q,Inventory& inv) {
+    if(id=="guard") return {{"Greywatch's knights have lost their oath. You will find them beyond the forest's eastern road. Their shields turn aside quick frontal blows.",
+        "Circle behind a shield or break it with L, your heavy strike. Hold K to guard. Catch a blow just as you raise your guard to stagger the attacker. Every action costs stamina.",
+        "F locks onto a nearby foe so you can circle while facing them. R changes target. Right mouse aim releases the lock. F1 opens your field guide. Search fallen creatures with E, then sell their materials at the smith."},false};
+    if(id.rfind("visitor_",0)==0) {
+        const std::vector<std::string> gossip={
+            "Ironback beetles have been chewing my cart wheels. Their shells fetch six coins each at the smith. Defeat one, then search its remains with E.",
+            "The Copper Kettle is the house northwest of the square. Its hearth offers shelter. Resting at a lantern also brings the creatures and oathless knights back.",
+            "The inn sells meadow tonics. I keep one for the long road home. The smith sells bundles of arrows for archers.",
+            "I laid the stone in Greywatch Bailey, beyond the forest to the east. The old pay chest still holds a knight's coat of plate.",
+            "Plate turns a heavy blow into a lesser one, but it slows your steps. Leave yourself enough stamina to dodge. A brave knight knows when to breathe.",
+            "Ashwood bows reward a steady hand. Hold the right mouse button to aim, then J to loose an arrow. A shield can stop it; a knight's back cannot."
+        };
+        int index=id.back()-'0'; return {{gossip[std::clamp(index,0,5)]},false};
+    }
     if(id=="keeper") {
         if(!q.accepted) {
             q.accepted=true;
@@ -18,10 +32,10 @@ DialogueResult talkTo(const std::string& id,Quest& q,Inventory& inv) {
         return {{"The Ember Seed rests in a forest cache. Moon Dew waits in Stillwater Cave, south of the forest. Bring both to the shrine's stone bowl."},false};
     }
     if(id=="weaver") {
-        if(inv.get(Item::Coat)) return {{"That mosswoven coat suits you. Eight hearts should make the old roads a little kinder."},false};
+        if(inv.get(Item::Coat)) return {{"Your mosswoven coat offers eight hearts without plate's weight. In your satchel, select an owned coat or plate and press Enter to change outfits."},false};
         if(inv.take(Item::Fragment,4)) {
             inv.add(Item::Coat,1);
-            return {{"Four glow fragments, just enough. Here is your mosswoven coat. It is equipped, and your maximum health is now eight. Rest at the lantern to fill it."},true};
+            return {{"Four glow fragments, just enough. Here is your mosswoven coat. Wear it for eight maximum hearts and lighter steps than plate. Select it in your satchel and press Enter to change outfits. Rest to fill your hearts."},true};
         }
         return {{"I stitch travelling coats. Bring me four glow fragments and I will weave one for you. Woodland creatures shed them when their restless magic settles.",
             "A coat adds two hearts. There is also an old copper blade in the Wandering Hollow, on the forest's northwest path."},false};

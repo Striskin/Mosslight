@@ -1,0 +1,38 @@
+MOSSMAP1 48 34 3 "The Warden's Garden" "A guardian of roots, a heart of amber"
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTT..........TTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTT..................TTTTTTTTTTTTTTT
+TTTTTTTTTTTTT......................TTTTTTTTTTTTT
+TTTTTTTTTTT..........................TTTTTTTTTTT
+TTTTTTTTTT.....,,,....................TTTTTTTTTT
+TTTTTTTTT......,,,.....................TTTTTTTTT
+TTTTTTTT................................TTTTTTTT
+TTTTTTT...PP.......................PP....TTTTTTT
+TTTTTTT...PP.....::::::::::::::....PP....TTTTTTT
+TTTTTT...........::::::::::::::...........TTTTTT
+TTTTTT...........::::::::::::::...........TTTTTT
+TTTTT........::::::::::::::::::::::........TTTTT
+TTTTT........::::::::::::::::::::::........TTTTT
+TTTTT........::::::::::::::::::::::..,,....TTTTT
+TTTTT...,,...::::::::::::::::::::::..,,....TTTTT
+TTTTT...,,...::::::::::::::::::::::........TTTTT
+TTTTT........::::::::::::::::::::::........TTTTT
+TTTTTT...........::::::::::::::...........TTTTTT
+TTTTTT...........::::::::::::::...........TTTTTT
+TTTTTTT..........::::::::::::::..........TTTTTTT
+TTTTTTT...PP.......................PP....TTTTTTT
+TTTTTTTT..PP.......................PP...TTTTTTTT
+TTTTTTTTT............+++++.............TTTTTTTTT
+TTTTTTTTTT...........+++++....,,,.....TTTTTTTTTT
+TTTTTTTTTTT..........+++++....,,,....TTTTTTTTTTT
+TTTTTTTTTTTTT........+++++.........TTTTTTTTTTTTT
+TTTTTTTTTTTTTTT......+++++.......TTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTT..+++++...TTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTT+++++TTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTT+++++TTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTT+++++TTTTTTTTTTTTTTTTTTTTTT
+exit 21 32 5 2 3 23 4 0
+enemy 2 23 15
+object 4 arena_note 27 28 0 1 "Amber lines warn of a charge. An amber ring warns of scattered sparks. Dodge through danger. Strike during the quiet after. You can retreat south."

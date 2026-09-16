@@ -1,0 +1,110 @@
+MOSSLIGHT: THE QUIET BELL
+PROJECT MEMORY: READ THIS BEFORE CHANGING CODE
+Update this file after every code-work session and every build. Record actual
+completed work, verification, remaining issues, and concrete next steps.
+AGENTS.md enforces this. scripts/build.ps1 automatically records build outcomes.
+
+GAME GOAL
+An original, cozy 2D top-down exploration action RPG in C++17 and raylib only.
+Smooth eight-direction movement, readable pixel art, connected regions, real-time
+sword combat, ruins, caves, gear, a quest and a boss. Prioritize stable, enjoyable
+play and small dependencies. Do not copy existing games' characters, names,
+assets, maps, UI, music, or stories. Do not add a large engine or ECS framework.
+
+SETTING AND PLAYABLE STORY
+Hearthmere's Quiet Bell has fallen silent. Keeper Aven asks the wayfarer to find
+an Ember Seed in Fernwake Wood and Moon Dew in Stillwater Cave. Offer both at
+The Quiet Bell Shrine to open The Warden's Garden. Soothe the Hollow Warden and
+return its Bellheart to Aven for the ending. Talla trades four glow fragments
+for a mosswoven coat. The optional Wandering Hollow contains a copper blade.
+
+COMPLETED SYSTEMS
+- Title, continue, new journey with overwrite confirmation, pause and clean exit.
+- Eight-direction walking/running, facing, tile collision and camera following.
+- Five handcrafted 48x34 regions, loaded one at a time, plus one generated cave.
+- Data-driven map layouts, exits, objects, items, enemy tuning and room templates.
+- NPC dialogue and contextual interaction prompts; satchel and quest journal.
+- Persistent chests, tonics, fragments, relics, automatically equipped sword/coat.
+- Sword arcs, per-swing hit tracking, enemy/player health, knockback, dodge,
+  invulnerability, death and respawn at village or shrine lantern checkpoints.
+- Bramblekin telegraph a lunge; lantern moths keep distance and fire projectiles.
+- Hollow Warden alternates telegraphed charges and radial volleys, faster below
+  half health. Persistent victory, reward and ending. Retreat is allowed.
+- Seeded template cave: six connected rooms, variable bridges/loops, encounters
+  and supply loot. Explicit mt19937 mapping preserves repeatability.
+- Versioned, bounded, validated, checksummed save snapshots; atomic replacement,
+  valid previous-save backup, recovery and visible save-error notifications.
+- Original pixel shapes/sprites, 480x270 target, integer scaling, letterboxing,
+  region banners, boss health/telegraphs, generated chime ambience and sound cues.
+- Windows MinGW build script, CMake alternative, regression suite and graphical
+  smoke/capture mode. README documents controls, walkthrough and architecture.
+
+ARCHITECTURE AND FILES
+src/types.hpp: plain simulation types, with no raylib dependency.
+src/game.*: screens, interaction orchestration, quest, transitions, checkpoints.
+src/player.*, collision.*, enemies.*, combat.*: movement and combat simulation.
+src/inventory.*, dialogue.*, maps.*, procedural.*, save.*: focused game systems.
+src/main.cpp, render.*, ui.*, audio.*: raylib/input/presentation only.
+data/maps/*.map: handcrafted ASCII tile maps with explicit object/exit records.
+data/items.txt, enemies.txt, rooms.txt: tuning and room data.
+scripts/author-maps.ps1: optional offline authoring, never called by the game.
+tests/tests.cpp: standalone C++ tests, no test-framework dependency.
+Runtime dependencies: C++ standard library and raylib 5.5 only. No network calls.
+
+BUILD AND RUN
+Windows build verified with MSYS2 UCRT64 GCC 14.2.0 and official raylib 5.5.
+PowerShell: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1 -Test -Smoke
+Play: build/Mosslight.exe
+Portable ZIP: build/Mosslight-win64.zip (extract the entire Mosslight folder).
+Distribution: executable plus adjacent data/ and RAYLIB-LICENSE.txt.
+Official raylib archive is pinned and SHA-256 checked by the build script.
+CMake/Visual Studio alternative is documented but has NOT been exercised here.
+Windows save: %LOCALAPPDATA%/Mosslight/journey.sav, with .bak backup.
+Smoke mode uses build/captures/smoke.sav, never the player's normal save.
+
+CONTROLS
+WASD/arrows move; Shift runs; J/Z sword; Space dodge; E interact;
+Q tonic; Tab/I satchel; M journal; Escape pause/back; Enter confirm/respawn;
+F5 save; F10 mute; F11 borderless fullscreen. Losing focus pauses active play.
+
+VERIFIED PROGRESS
+Final Windows build passed without compiler warnings.
+2,692 simulation checks passed: all handcrafted routes and destination spawns,
+256 seeded cave layouts, normalized movement, swept collision, sword arc/hit
+tracking, gear, enemy behaviors and both boss phases, save corruption/recovery,
+failed-save notifications, relic quest/gate, death/respawn, continuation and ending.
+A prepared-loadout input bot defeated the boss in 10.63 simulated seconds.
+This is automated validation, not a claim of a human end-to-end playthrough.
+Actual raylib/OpenGL/audio initialization and 205-frame graphical smoke passed.
+12 screenshots captured; title, world, dialogue, inventory, journal, death and
+boss presentation inspected. Fixed player visibility during invulnerability,
+boss camera framing, banner contrast, and a journal line crossing a label.
+Executable is about 5 MB and imports only Windows system libraries.
+Verification log: build/verification.log. Captures: build/captures/*.png.
+Final package check passed: packaged executable matches the tested build by
+SHA-256, all required data/license files are present in the ZIP, and the packaged
+executable independently completed the 205-frame graphical smoke test.
+Package log: build/package-verification.log. Portable ZIP is about 1.5 MB.
+
+KNOWN LIMITATIONS
+First vertical slice: one quest chain, one boss, two regular enemy types, two
+gear upgrades and one procedural cave. Buildings are exterior scenery. Original
+art is deliberately simple. No controller/remapping, multi-slot saves or authored
+soundtrack yet. Enemies use local steering and reset on region reload; the boss
+stays defeated after victory. No unresolved compile/test failures.
+Save checksum detects corruption, not deliberate save editing. This is a local
+single-player game, with no accounts, secrets, backend or runtime network access.
+
+NEXT
+1. Human playtest the full journey, especially controller-free combat feel,
+   signposting, boss telegraphs, healing pressure, travel time and reward balance.
+2. Tune the existing slice from that feedback before expanding the world.
+3. Then consider input remapping/controller support and a second compact quest.
+Keep systems focused. Preserve working behavior. Update this memory after edits.
+
+LAST BUILD
+2026-09-14 23:32:14: Game compiled. All 2,692 simulation checks and graphical smoke test passed. Screenshot review completed. Next: human balance/playtesting.
+
+LAST PACKAGE CHECK
+2026-09-15: Portable package verified, matching executable hash and independent
+graphical smoke pass. Complete first playable slice ready for the user.

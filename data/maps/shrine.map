@@ -1,0 +1,41 @@
+MOSSMAP1 48 34 3 "The Quiet Bell Shrine" "Two small lights can wake a forgotten road"
+TTTTTTTTTTTTTTTTTTTT+++++++TTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT...+++++++....TTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT...+++++++....TTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT...+++++++....TTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT...+++++++....TTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT...+++++++....TTTTTTTTTTTTTTTTT
+T...................+++++++....................T
+T..........:::::::::+++++++::::::::::..........T
+T..........:PP::::::+++++++:::::::PP:..........T
+T....,,,,..:PP::::::+++++++:::::::PP:..........T
+T....,,,,..:PP::::::+++++++:::::::PP:..........T
+T....,,,,..:::::P:::+++++++:::P::::::..........T
+T....,,,,..:::::P:::+++++++:::P::::::..........T
+T..........:::::::::+++++++::::::::::..........T
+T..........::::::::::::::::::::::::::..........T
+T..........::::::::::::::::::::::::::..........T
+T..........::::::::::::::::::::::::::..........T
+T..........::::::::::::::::::::::::::.,,,,,....T
+T.....~~~~.::::::::::::::::::::::::::.,,,,,....T
+T.....~~~~.:::::::::+++++++::::::::::.,,,,,....T
+T.....~~~~.:::::P:::+++++++:::P::::::..........T
+T.....~~~~.:PP::P:::+++++++:::P:::PP:..........T
+T.....~~~~.:PP::::::+++++++:::::::PP:..........T
+T.....~~~~.:PP::::::+++++++:::::::PP:..........T
+T..........:::::::::+++++++::::::::::..........T
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTT......+++++++.......TTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTT+++++++TTTTTTTTTTTTTTTTTTTTT
+exit 20 32 7 2 1 23 4 0
+exit 20 0 7 2 4 23 28 1
+object 3 quiet_bowl 23 14 0 1 "The shrine bowl"
+object 2 shrine_lantern 19 23 0 1 "Pilgrim lantern"
+object 4 shrine_story 28 21 0 1 "We built no throne for the Warden. Only a garden, a bell, and a promise that someone would return."
+object 1 shrine_tonics 32 17 0 2 "Pilgrim's offering"

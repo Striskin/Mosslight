@@ -1,0 +1,48 @@
+MOSSMAP1 48 34 1 "Fernwake Wood" "Between birdsong and old, sleeping magic"
+TTTTTTTTTTTTTTTTTTTTT+++++TTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT....+++++...TTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT....+++++...TTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT....+++++...TTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT....+++++...TTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTT....+++++...TTTTTTTTTTTTTTTTTTT
+T...............,,,..+++++.....................T
++++++++++.......,,,..+++++.............,,,,....T
++++++++++............+++++.............,,,,....T
++++++++++.........,,.+++++.............,,,,....T
+T.....+++.........,,.+++++....TTTTTTT..........T
+T.....+++TTTTTT...,,.+++++....TTTTTTT..........T
+T.....+++TTTTTT......+++++....TTTTTTT..........T
+T.....+++TTTTTT......+++++....TTTTTTT..........T
+T.....+++TTTTTT......+++++....TTTTTTT..........T
+T.....+++............+++++.............++++....T
++++++++++++++++++++++++++++++++++++++++++++....T
++++++++++++++++++++++++++++++++++++++++++++....T
++++++++++++++++++++++++++++++++++++++++++++....T
++++++++++++++++++++++++++++++++...TTTTT++++....T
+T........TTTTT.......+++++........TTTTT++++....T
+T........TTTTT.......+++++..~~~~..TTTTTTTTT....T
+T........TTTTT.......+++++..~~~~...............T
+T....................+++++..~~~~...............T
+TTTTTTTTTTTTTTT......+++++...~~~~..............T
+TTTTTTTTTTTTTT,,,,...+++++.,,~~~~TTTTTTTT,,,TTTT
+TTTTTTTTTTTTTT,,,,...+++++.,,~~~~TTTTTTTT,,,TTTT
+TTTTTTTTTTTTTT,,,,...+++++.,,,...TTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTT......+++++.......TTTTTTTTTTTTTTT
+TTT,,,TTTTTTTTT......+++++.......TTTTTTTTTTTTTTT
+TTT,,,TTTTTTTTT......+++++.......TTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTT......+++++.......TTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTT......+++++.......TTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTT+++++TTTTTTTTTTTTTTTTTTTTTT
+exit 0 16 2 4 0 43 17 0
+exit 21 0 5 2 3 23 29 0
+exit 21 32 5 2 2 23 3 0
+exit 0 7 2 3 5 3 8 0
+object 1 forest_ember 41 17 4 1 "An ember-warm cache"
+object 1 forest_tonic 17 27 0 2 "Herbalist's cache"
+object 4 forest_crossroads 26 17 0 1 "NORTH: the Quiet Bell shrine. SOUTH: Stillwater Cave. WEST: Hearthmere. NORTHWEST: the Wandering Hollow, where an old copper blade waits."
+object 4 forest_hollow 5 10 0 1 "THE WANDERING HOLLOW. The stone paths shift for each traveller, then remember their footsteps. Copper waits in the far southeastern room."
+enemy 0 17 17
+enemy 0 36 17
+enemy 1 25 10
+enemy 0 23 26
+enemy 1 39 24

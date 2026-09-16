@@ -1,0 +1,42 @@
+MOSSMAP1 48 34 0 "Hearthmere" "Where every road begins with a warm cup"
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+T.TTT................................TTTTTTTTTTT
+T.TTT................................TTTTTTTTTTT
+T.TTT................................TTTTTTTTTTT
+T.TTT.HHHHHHH.,,....+++........HHHHHHHTTTTTTTTTT
+T.TTT.HHHHHHH.,,....+++...,,,..HHHHHHHTTTTTTTTTT
+T.TTT.HHHHHHH.,,....+++...,,,..HHHHHHHTTTTTTTTTT
+T.TTT.HHHHHHH.......+++........HHHHHHH.........T
+T.TTT.HHHHHHH.......+++........HHHHHHH.........T
+T.TTT....+++........+++..........+++...,,,.....T
+T.TTT....+++........+++..........+++...,,,.....T
+T.TTT....+++......++++++++.......+++...........T
+T.TTT.,,.+++......++++++++.......+++...........T
+T.....,,.+++++++++++++++++++++++++++++++++++++++
+T........+++++++++++++++++++++++++++++++++++++++
+T........+++++++++++++++++++++++++++++++++++++++
+T........+++++++++++++++++++++++++++++++++++++++
+T.....,,.+++......++++++++.....................T
+T.....,,.+++......++++++++,,,.....~~~~~~~......T
+T......HHHHHH.......+++...,,,.....~~~~~~~......T
+T......HHHHHH.......+++...,,,..~~~~~~~~~~~~~...T
+T......HHHHHH.......+++........~~~~~~~~~~~~~...T
+T......HHHHHH.......+,,,,....~~~~~~~~~~~~~~~...T
+T....................,,,,....~~~~~~~~~~~~~~~...T
+T....................,,,,....~~~~~~~~~~~~~~~...T
+TTTTTTTTTTTTT........,,,,....~~~~~~~~~~~~~~~...T
+TTTTTTTTTTTTT..................~~~~~~~~~~~~~...T
+TTTTTTTTTTTTT..................~~~~~~~~~~~~~...T
+TTTTTTTTTTTTT..................................T
+TTTTTTTTTTTTT..................................T
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+exit 46 16 2 4 1 3 17 0
+object 0 keeper 22 14 0 1 "Keeper Aven"
+object 0 weaver 12 21 0 1 "Talla the Weaver"
+object 2 village_lantern 19 17 0 1 "Hearth lantern"
+object 1 village_supplies 10 13 0 2 "A traveller's welcome"
+object 4 village_east 40 15 0 1 "EAST: Fernwake Wood. NORTH in the forest: the old shrine. SOUTH: Stillwater Cave. A lantern is always a way home."
+object 4 village_water 29 23 0 1 "For all who wander: WASD to walk, J to swing, SPACE to dodge, E to talk or open, Q for a tonic. TAB opens your satchel."

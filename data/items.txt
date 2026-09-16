@@ -1,0 +1,7 @@
+0 "Meadow tonic" "Restores three hearts. Press Q to drink."
+1 "Glow fragment" "Trade four to the village weaver for a coat."
+2 "Copper blade" "Equipped automatically. Sword damage: 2."
+3 "Mosswoven coat" "Equipped automatically. Maximum hearts: 8."
+4 "Ember Seed" "A warm forest relic for the ruined shrine."
+5 "Moon Dew" "A cool cave relic for the ruined shrine."
+6 "Bellheart" "The Quiet Bell sings again. Return to Aven."
